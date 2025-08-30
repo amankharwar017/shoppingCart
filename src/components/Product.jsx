@@ -1,6 +1,17 @@
 import React from "react";
-
+import { useCart } from "../contexts/CartProvider";
 function Product({ id, title, price, img }) {
+  const { addItemToCart } = useCart();
+  function handleAdd() {
+    const newCartItem = {
+      id: id,
+      price: price,
+      title: title,
+      img: img,
+      quantity: 1,
+    };
+    addItemToCart(newCartItem);
+  }
   return (
     <div
       style={{
@@ -13,7 +24,7 @@ function Product({ id, title, price, img }) {
       <img src={img} alt={title} height={200} />
       <p>title: {title}</p>
       <p>price:{price}</p>
-      <button>Add to cart</button>
+      <button onClick={handleAdd}>Add to cart</button>
     </div>
   );
 }
